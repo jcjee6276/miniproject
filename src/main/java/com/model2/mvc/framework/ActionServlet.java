@@ -18,6 +18,7 @@ public class ActionServlet extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		String resources=getServletConfig().getInitParameter("resources");
+		System.out.println("resources:"+resources);
 		mapper=RequestMapping.getInstance(resources);
 	}
 
@@ -36,6 +37,7 @@ public class ActionServlet extends HttpServlet {
 			
 			String resultPage=action.execute(request, response);
 			String result=resultPage.substring(resultPage.indexOf(":")+1);
+			
 			
 			if(resultPage.startsWith("forward:"))
 				HttpUtil.forward(request, response, result);

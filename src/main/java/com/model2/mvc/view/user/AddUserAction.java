@@ -2,6 +2,7 @@ package com.model2.mvc.view.user;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.model2.mvc.framework.Action;
 import com.model2.mvc.service.user.UserService;
@@ -28,6 +29,10 @@ public class AddUserAction extends Action {
 		
 		UserService service=new UserServiceImpl();
 		service.addUser(userVO);
+		
+		HttpSession session =request.getSession();
+		String sessionId = ((UserVO)session.getAttribute("loginuser")).getUserId();
+		
 		
 		return "redirect:/user/loginView.jsp";
 	}

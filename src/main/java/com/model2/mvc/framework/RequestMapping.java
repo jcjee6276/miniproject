@@ -1,5 +1,6 @@
 package com.model2.mvc.framework;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +18,7 @@ public class RequestMapping {
 		InputStream in = null;
 		try{
 			in = getClass().getClassLoader().getResourceAsStream(resources);
+			//in = new FileInputStream(resources);
 			properties = new Properties();
 			properties.load(in);
 		}catch(Exception ex){
@@ -47,7 +49,7 @@ public class RequestMapping {
 			try{
 				Class c = Class.forName(className);
 				Object obj = c.newInstance();
-				if(obj instanceof Action){
+				if(obj instanceof Action){ //유효성 체크 액션의 하위인지.
 					map.put(path, (Action)obj);
 					action = (Action)obj;
 				}else{
